@@ -272,7 +272,7 @@ async function initializeAudioContext() {
 async function startConversation() {
     try {
         // Initialize WebSocket connection to our server
-        openAiWs = new WebSocket('wss://synta-realtime-sairambanoth5.replit.app');
+        openAiWs = new WebSocket('wss://realtime-syntax-casherd-sairambanoth5.replit.app');
         logEvent('WebSocket connection initiated');
         
         // Add connection timeout
