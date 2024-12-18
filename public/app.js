@@ -305,7 +305,7 @@ async function startConversation() {
                     modalities: ['text', 'audio'],
                     input_audio_format: 'pcm16',
                     output_audio_format: 'pcm16',
-                    voice: 'sage',
+                    voice: 'Ash',
                     turn_detection: {
                         type: 'server_vad',
                         threshold: 0.5,
