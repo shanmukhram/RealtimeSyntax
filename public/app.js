@@ -278,6 +278,7 @@ async function startConversation() {
         openAiWs.onopen = async () => {
             logEvent('WebSocket connected');
             console.log('WebSocket connection opened');
+            stopButton.disabled = false;  // Enable stop button when connection is established
             
             // Configure the session with instructions
             openAiWs.send(JSON.stringify({
@@ -374,6 +375,8 @@ async function startConversation() {
             logEvent('WebSocket error', { error: error.message });
             console.error('WebSocket error:', error);
             statusElement.textContent = 'Connection error';
+            stopButton.disabled = false;  // Enable stop button on error
+            talkButton.disabled = false;  // Re-enable talk button on error
         };
         
         openAiWs.onclose = () => {
@@ -381,6 +384,8 @@ async function startConversation() {
             console.log('WebSocket connection closed');
             statusElement.textContent = 'Connection closed';
             isRecording = false;
+            stopButton.disabled = false;  // Enable stop button on close
+            talkButton.disabled = false;  // Re-enable talk button on close
             stopRecording();
         };
         
