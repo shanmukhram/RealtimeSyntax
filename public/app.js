@@ -275,7 +275,17 @@ async function startConversation() {
         openAiWs = new WebSocket('wss://synta-realtime-sairambanoth5.replit.app');
         logEvent('WebSocket connection initiated');
         
+        // Add connection timeout
+        const connectionTimeout = setTimeout(() => {
+            if (openAiWs.readyState !== WebSocket.OPEN) {
+                logEvent('WebSocket connection timeout');
+                openAiWs.close();
+                retryConnection();
+            }
+        }, 5000);
+
         openAiWs.onopen = async () => {
+            clearTimeout(connectionTimeout);
             logEvent('WebSocket connected');
             console.log('WebSocket connection opened');
             stopButton.disabled = false;  // Enable stop button when connection is established
@@ -528,3 +538,9 @@ stopButton.addEventListener('click', () => {
         stopConversation();
     }
 });
+
+function retryConnection() {
+    console.log('Retrying WebSocket connection...');
+    logEvent('Retrying WebSocket connection');
+    startConversation();
+}
